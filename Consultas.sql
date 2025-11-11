@@ -2,14 +2,14 @@ USE SneezePharmaDB;
 
 -- Clientes + Telefones + Situação
 SELECT 
-    c.IdCliente,
-    c.Nome,
-    c.CPF,
-    c.DataNascimento,
-    s.Situacao,
-    t.CodPais,
-    t.CodArea,
-    t.Numero
+c.IdCliente,
+c.Nome,
+c.CPF,
+c.DataNascimento,
+s.Situacao,
+t.CodPais,
+t.CodArea,
+t.Numero
 FROM Clientes c
 INNER JOIN SituacaoClientes s ON c.IdCliente = s.IdCliente
 INNER JOIN Telefones t ON c.IdCliente = t.IdCliente;

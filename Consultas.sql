@@ -1,6 +1,6 @@
 USE SneezePharmaDB;
 
--- CLIENTES + TELEFONES + SITUAÇÃO
+-- Clientes + Telefones + Situação
 SELECT 
     c.IdCliente,
     c.Nome,
@@ -14,7 +14,7 @@ FROM Clientes c
 INNER JOIN SituacaoClientes s ON c.IdCliente = s.IdCliente
 INNER JOIN Telefones t ON c.IdCliente = t.IdCliente;
 
--- CLIENTES + VENDAS + ITENSVENDA + MEDICAMENTOS
+-- Clientes + Vendas + ItensVenda + Medicamentos
 SELECT
 v.IdVenda,
 c.Nome AS Cliente,
@@ -29,7 +29,7 @@ INNER JOIN Clientes c ON v.IdCliente = c.IdCliente
 INNER JOIN ItensVenda iv ON v.IdVenda = iv.IdVenda
 INNER JOIN Medicamentos m ON iv.IdMedicamento = m.IdMedicamento;
 
--- FORNECEDORES + COMPRAS + ITENSCOMPRA + PRINCÍPIOS ATIVOS
+-- Fornecedores + Compras + ItensCompra + Princípios Ativos
 SELECT
 f.IdFornecedor,
 f.RazaoSocial AS Fornecedor,
@@ -46,7 +46,7 @@ INNER JOIN Fornecedor f ON c.IdFornecedor = f.IdFornecedor
 INNER JOIN ItensCompra ic ON c.IdCompra = ic.IdCompra
 INNER JOIN PrincipiosAtivos pa ON ic.IdPrincipio = pa.IdPrincipio;
 
--- PRODUÇÕES + ITENSPRODUCAO + PRINCÍPIOS ATIVOS + MEDICAMENTOS
+-- Produções + ItensProdução + Princípios Ativos + Medicamentos
 SELECT
 pr.IdProducao,
 m.Nome AS Medicamento,
@@ -59,7 +59,7 @@ INNER JOIN Medicamentos m ON pr.IdMedicamento = m.IdMedicamento
 INNER JOIN ItensProducao ip ON pr.IdProducao = ip.IdProducao
 INNER JOIN PrincipiosAtivos pa ON ip.IdPrincipio = pa.IdPrincipio;
 
--- FORNECEDORES + SITUAÇÃO + TEMPO DE ABERTURA
+-- Fornecedores + Situação + Tempo de Abertura
 SELECT
 f.IdFornecedor,
 f.RazaoSocial,
@@ -69,7 +69,7 @@ DATEDIFF(YEAR, f.DataAbertura, GETDATE()) AS AnosDeAbertura
 FROM Fornecedor f
 INNER JOIN SituacaoFornecedores s ON f.IdFornecedor = s.IdFornecedor;
 
--- MEDICAMENTOS + SITUAÇÃO
+-- Medicamentos e Situação
 SELECT
 m.IdMedicamento,
 m.Nome AS Medicamento,
@@ -78,21 +78,21 @@ s.Situacao
 FROM Medicamentos m
 INNER JOIN SituacaoMedicamentos s ON m.IdMedicamento = s.IdMedicamento;
 
--- CLIENTES RESTRITOS
+-- Clientes Restritos
 SELECT
 cr.IdClienteRestrito,
 c.Nome AS Cliente
 FROM ClientesRestritos cr
 INNER JOIN Clientes c ON cr.IdCliente = c.IdCliente;
 
--- FORNECEDORES BLOQUEADOS
+-- Fornecedores Bloqueados
 SELECT
 fb.IdFornecedorBloqueado,
 f.RazaoSocial AS Fornecedor
 FROM FornecedoresBloqueados fb
 INNER JOIN Fornecedor f ON fb.IdFornecedor = f.IdFornecedor;
 
--- VENDAS COMPLETAS
+-- Vendas Completas
 SELECT
 v.IdVenda,
 c.Nome AS Cliente,

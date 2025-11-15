@@ -157,5 +157,6 @@ BEGIN
 END;
 GO
 
+-- Exemplo funcionando
 EXEC sp_ComprasFornecedor;
 GO

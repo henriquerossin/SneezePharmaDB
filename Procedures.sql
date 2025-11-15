@@ -138,7 +138,24 @@ EXEC sp_RegistrarVenda
     @IdMedicamento3 = 3,
     @Quantidade3 = 2,
     @ValorUnitario3 = 12.75;
+GO
 
-    SELECT * FROM Vendas
-    SELECT * FROM ItensVenda;
-    SELECT * FROM Medicamentos
+-- Relatório de compras por fornecedor
+CREATE OR ALTER PROCEDURE sp_ComprasFornecedor
+AS
+BEGIN
+    SELECT 
+        f.RazaoSocial,
+        COUNT(DISTINCT c.IdCompra) AS QuantidadeCompras,
+        COUNT(i.IdCompra) AS ItensComprados,
+        ISNULL(SUM(i.TotalItem), 0) AS ValorTotalGasto,
+        MAX(c.DataCompra) AS UltimaCompra
+    FROM Fornecedor f
+    LEFT JOIN Compras c ON c.IdFornecedor = f.IdFornecedor
+    LEFT JOIN ItensCompra i ON i.IdCompra = c.IdCompra
+    GROUP BY f.RazaoSocial;
+END;
+GO
+
+EXEC sp_ComprasFornecedor;
+GO
